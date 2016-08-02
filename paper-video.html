@@ -237,9 +237,12 @@
 				sec = sec >= 10 ? sec : '0' + sec;
 
 				return min + ':' + sec;
-		    },
+	    },
 			play: function(){
-				return this.$.paperVideo.play();
+        var self = this;
+				return this.$.paperVideo.play().catch(function(err) {
+          self.fire('paper-video-error', err);
+        });
 			},
 			pause: function(){
 				return this.$.paperVideo.pause();
